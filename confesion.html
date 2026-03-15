@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Un pequeño misterio...</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(180deg,#0d0221,#240046,#ff8fab);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.card{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  max-width:520px;
+  box-shadow:0 10px 35px rgba(0,0,0,0.4);
+  position:relative;
+  z-index:2;
+  animation:fade 1s ease;
+}
+
+button{
+  margin-top:15px;
+  padding:12px 22px;
+  border:none;
+  border-radius:12px;
+  background:#ff4fa0;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+button:hover{transform:scale(1.08)}
+
+input{
+  margin-top:12px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.big{
+  font-size:38px;
+  color:#ff2c8b;
+  font-weight:bold;
+  text-shadow:0 0 10px #ff7ab6;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:twinkle 2s infinite alternate;
+}
+
+.nameStar{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  box-shadow:0 0 8px white;
+}
+
+@keyframes twinkle{
+  from{opacity:0.2}
+  to{opacity:1}
+}
+
+.moon{
+  position:absolute;
+  width:120px;
+  height:120px;
+  background:#fff;
+  border-radius:50%;
+  top:60px;
+  right:80px;
+  box-shadow:0 0 40px rgba(255,255,255,0.7);
+  animation:moonGlow 4s infinite alternate;
+}
+
+@keyframes moonGlow{
+  from{box-shadow:0 0 30px rgba(255,255,255,0.4)}
+  to{box-shadow:0 0 70px rgba(255,255,255,0.9)}
+}
+
+.heart{
+  position:absolute;
+  color:#ff4fa0;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh); opacity:1}
+  to{transform:translateY(-10vh); opacity:0}
+}
+
+.explode{
+  position:absolute;
+  color:#ff2c8b;
+  font-size:24px;
+  pointer-events:none;
+  animation:boom 1.2s forwards;
+}
+
+@keyframes boom{
+  from{transform:scale(0.5); opacity:1}
+  to{transform:translate(var(--x),var(--y)) scale(1.6); opacity:0}
+}
+
+.shootingStar{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  box-shadow:0 0 6px white;
+  animation:shoot 2s linear forwards;
+}
+
+@keyframes shoot{
+  from{transform:translate(0,0);opacity:1}
+  to{transform:translate(-600px,300px);opacity:0}
+}
+
+</style>
+</head>
+<body>
+
+<div class="moon"></div>
+
+<iframe id="music" width="0" height="0"
+src="https://www.youtube.com/embed/ntdwWKaGaPQ?enablejsapi=1"
+frameborder="0" allow="autoplay"></iframe>
+
+<div class="card" id="game">
+<h2>Tengo un pequeño juego para ti 🌙</h2>
+<p>Si resuelves los misterios descubrirás algo importante.</p>
+<button onclick="startGame()">Empezar</button>
+</div>
+
+<script>
+
+function startGame(){
+ puzzle1();
+}
+
+function puzzle1(){
+ document.getElementById("game").innerHTML=`
+ <h2>Acertijo 1 🧩</h2>
+ <p>¿Qué cosa aparece cuando alguien te manda un mensaje bonito y te hace sonreír?</p>
+ <input id="r1" placeholder="Tu respuesta">
+ <br>
+ <button onclick="check1()">Responder</button>
+ `;
+}
+
+function check1(){
+ let r=document.getElementById("r1").value.toLowerCase();
+ if(r.includes("sonr")){
+ puzzle2();
+ }else{
+ alert("Pista: pasa en tu cara cuando estás feliz 😊");
+ }
+}
+
+function puzzle2(){
+ document.getElementById("game").innerHTML=`
+ <h2>Acertijo 2 ✨</h2>
+ <p>Hay alguien que me parece muy linda.</p>
+ <p>Hablamos por internet...</p>
+ <p>¿Quién crees que es?</p>
+ <input id="r2" placeholder="Escribe un nombre">
+ <br>
+ <button onclick="final()">Revelar</button>
+ `;
+}
+
+function final(){
+ showComic();
+}
+
+function showComic(){
+ let iframe=document.getElementById("music");
+ iframe.src="https://www.youtube.com/embed/ntdwWKaGaPQ?autoplay=1&start=28&loop=1&playlist=ntdwWKaGaPQ";
+
+ document.getElementById("game").innerHTML=`
+ <h2>Una pequeña historia... 🌙</h2>
+ <div style="text-align:left;font-size:18px;line-height:1.6">
+ <p>👧 Una chica mirando la luna...</p>
+ <p>🌙 La luna preguntó: "¿En qué piensas?"</p>
+ <p>👧 "En alguien que me hace sonreír cuando hablamos..."</p>
+ <p>🌙 "Entonces deberías decirlo"</p>
+ <p>👧 "Tal vez tenga miedo..."</p>
+ <p>🌙 "Las cosas bonitas valen la pena"</p>
+ </div>
+ <br>
+ <button onclick="continueConfession()">Continuar...</button>
+ `;
+}
+
+function continueConfession(){
+
+ let iframe=document.getElementById("music");
+ iframe.src="https://www.youtube.com/embed/ntdwWKaGaPQ?autoplay=1&start=28&loop=1&playlist=ntdwWKaGaPQ";
+
+ document.getElementById("game").innerHTML=`
+ <h2>Bueno... tengo que confesarte algo 💌</h2>
+ <p class="big" id="type"></p>
+ <p>Quería encontrar una forma especial de decírtelo.</p>
+ <div>
+ <p>¿Quieres ser la aya de mi Mitsuki?</p>
+ <button onclick="yes()">Sí quiero 💖</button>
+ <button onclick="no()">No 🙈</button>
+ </div>
+ `;
+
+ typeText("Me gustas mucho.");
+ explodeHearts();
+ drawName();
+}
+
+function typeText(text){
+ let i=0;
+ function typing(){
+ if(i<text.length){
+ document.getElementById("type").innerHTML+=text.charAt(i);
+ i++;
+ setTimeout(typing,80);
+ }
+ }
+ typing();
+}
+
+function explodeHearts(){
+ for(let i=0;i<40;i++){
+ const h=document.createElement("div");
+ h.className="explode";
+ h.innerHTML="❤";
+ const x=(Math.random()*400-200)+"px";
+ const y=(Math.random()*400-200)+"px";
+ h.style.left="50%";
+ h.style.top="50%";
+ h.style.setProperty("--x",x);
+ h.style.setProperty("--y",y);
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),1200);
+ }
+}
+
+function drawName(){
+ const points=[
+ [20,20],[20,25],[20,30],[20,35],[22,30],[24,25],[26,20],
+ [30,35],[30,30],[30,25],[32,25],[34,30],[34,35],
+ [38,20],[38,35],[42,35],[42,20],
+ [46,35],[48,35],[50,33],[48,31],[46,31]
+ ];
+
+ points.forEach((p,i)=>{
+  setTimeout(()=>{
+   const s=document.createElement("div");
+   s.className="nameStar";
+   s.style.left=p[0]+"vw";
+   s.style.top=p[1]+"vh";
+   document.body.appendChild(s);
+
+   // cuando termina de escribirse el nombre aparece una estrella fugaz
+   if(i===points.length-1){
+     setTimeout(()=>{
+       const shoot=document.createElement("div");
+       shoot.className="shootingStar";
+       shoot.style.left="80vw";
+       shoot.style.top="20vh";
+       document.body.appendChild(shoot);
+       setTimeout(()=>shoot.remove(),2000);
+     },500);
+   }
+
+  }, i*180);
+ });
+}, i*180);
+ });
+}
+
+function yes(){
+ document.getElementById("game").innerHTML=`
+ <h2>Me haces muy feliz 🥹</h2>
+ <p>Prometo seguir haciéndote sonreír.</p>
+ `;
+}
+
+function no(){
+ document.getElementById("game").innerHTML=`
+ <h2>Gracias por ser sincera 💫</h2>
+ <p>Igual me alegra haberte conocido.</p>
+ `;
+}
+
+setInterval(()=>{
+ const heart=document.createElement("div");
+ heart.className="heart";
+ heart.innerHTML="❤";
+ heart.style.left=Math.random()*100+"vw";
+ heart.style.fontSize=(Math.random()*20+10)+"px";
+ document.body.appendChild(heart);
+ setTimeout(()=>heart.remove(),6000);
+},300);
+
+for(let i=0;i<120;i++){
+ const star=document.createElement("div");
+ star.className="star";
+ star.style.left=Math.random()*100+"vw";
+ star.style.top=Math.random()*100+"vh";
+ star.style.animationDuration=(Math.random()*2+1)+"s";
+ document.body.appendChild(star);
+}
+
+setInterval(()=>{
+ const s=document.createElement("div");
+ s.className="shootingStar";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*40+"vh";
+ document.body.appendChild(s);
+ setTimeout(()=>s.remove(),2000);
+},6000);
+
+</script>
+
+</body>
+</html>
